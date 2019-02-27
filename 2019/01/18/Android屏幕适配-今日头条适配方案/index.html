@@ -79,13 +79,19 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="扫地工程师">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="在Android开发中，由于Android碎片化严重，屏幕分辨率千奇百怪，而想要在各种分辨率的设备上显示基本一致的效果，适配成本越来越高。虽然Android官方提供了dp单位来适配，但其在各种奇怪分辨率下表现却不尽如人意，因此下面探索一种简单且低侵入的适配方式。  Android中的dp在渲染前会将dp转为px，计算公式为：px = density  dpdensity = dpi / 160px">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android屏幕适配-今日头条适配方案">
+<meta property="og:url" content="http://yoursite.com/2019/01/18/Android屏幕适配-今日头条适配方案/index.html">
 <meta property="og:site_name" content="扫地工程师">
+<meta property="og:description" content="在Android开发中，由于Android碎片化严重，屏幕分辨率千奇百怪，而想要在各种分辨率的设备上显示基本一致的效果，适配成本越来越高。虽然Android官方提供了dp单位来适配，但其在各种奇怪分辨率下表现却不尽如人意，因此下面探索一种简单且低侵入的适配方式。  Android中的dp在渲染前会将dp转为px，计算公式为：px = density  dpdensity = dpi / 160px">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b051c2f9ly1g0kxe9op3hj208c0cvt8q.jpg">
+<meta property="og:updated_time" content="2019-02-27T05:57:03.263Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="扫地工程师">
+<meta name="twitter:title" content="Android屏幕适配-今日头条适配方案">
+<meta name="twitter:description" content="在Android开发中，由于Android碎片化严重，屏幕分辨率千奇百怪，而想要在各种分辨率的设备上显示基本一致的效果，适配成本越来越高。虽然Android官方提供了dp单位来适配，但其在各种奇怪分辨率下表现却不尽如人意，因此下面探索一种简单且低侵入的适配方式。  Android中的dp在渲染前会将dp转为px，计算公式为：px = density  dpdensity = dpi / 160px">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/b051c2f9ly1g0kxe9op3hj208c0cvt8q.jpg">
 
 
 
@@ -115,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/18/Android屏幕适配-今日头条适配方案/"/>
 
 
 
 
 
-  <title>扫地工程师</title>
+  <title>Android屏幕适配-今日头条适配方案 | 扫地工程师</title>
   
 
 
@@ -140,8 +146,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,9 +239,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -266,9 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/18/Android屏幕适配-今日头条适配方案/" itemprop="url">Android屏幕适配-今日头条适配方案</a></h1>
+          <h1 class="post-title" itemprop="name headline">Android屏幕适配-今日头条适配方案</h1>
         
 
         <div class="post-meta">
@@ -318,20 +321,24 @@
       
 
       
-        
-          
-          在Android开发中，由于Android碎片化严重，屏幕分辨率千奇百怪，而想要在各种分辨率的设备上显示基本一致的效果，适配成本越来越高。虽然Android官方提供了dp单位来适配，但其在各种奇怪分辨率下表现却不尽如人意，因此下面探索一种简单且低侵入的适配方式。
+        <p>在Android开发中，由于Android碎片化严重，屏幕分辨率千奇百怪，而想要在各种分辨率的设备上显示基本一致的效果，适配成本越来越高。虽然Android官方提供了dp单位来适配，但其在各种奇怪分辨率下表现却不尽如人意，因此下面探索一种简单且低侵入的适配方式。</p>
+<hr>
+<p>Android中的dp在渲染前会将dp转为px，计算公式为：<br>px = density <em> dp<br>density = dpi / 160<br>px = dp </em> (dpi / 160)</p>
+<h3 id="屏幕尺寸、分辨率、像素密度三者关系"><a href="#屏幕尺寸、分辨率、像素密度三者关系" class="headerlink" title="屏幕尺寸、分辨率、像素密度三者关系"></a>屏幕尺寸、分辨率、像素密度三者关系</h3><p>通常情况下，一部手机的分辨率是宽x高，屏幕大小是以寸为单位，那么三者的关系为：<br><img src="http://ww1.sinaimg.cn/large/b051c2f9ly1g0kxe9op3hj208c0cvt8q.jpg" alt=""><br>举个例子：屏幕分辨率为：1920 * 1080，屏幕尺寸为5寸的话，那么dpi为440 (2203px / 5 = 440)</p>
+<h3 id="这样会存在什么问题呢-？"><a href="#这样会存在什么问题呢-？" class="headerlink" title="这样会存在什么问题呢 ？"></a>这样会存在什么问题呢 ？</h3><p>假如入我们的UI设计图是按屏幕宽度为360dp设计的，那么上述设备中，屏幕宽度其实为1080/(440/160）= 392.7dp<br>也就是屏幕要比设计图要宽的，这时就会导致按360dp宽度来开发实际显示不全的情况。</p>
+<h3 id="梳理需求"><a href="#梳理需求" class="headerlink" title="梳理需求"></a>梳理需求</h3><p>首先来梳理一下我们的需求，设计图都是以固定的尺寸来设计的。<br>比如以分辨率1920px <em> 1080px，以density为3来标注（这个density是设计自己衡量的，取决于屏幕尺寸)那么此时屏幕其实是640dp </em> 360dp。<br>开发拿到设计图1920px <em> 1080px，还有dpi，就可以计算出density，从而计算出设计图的dp单位：640dp </em> 360dp。</p>
+<h3 id="找兼容突破口"><a href="#找兼容突破口" class="headerlink" title="找兼容突破口"></a>找兼容突破口</h3><p>从dp和px的转换公式：<strong>px = dp * density</strong><br>可以看出，如果设计图宽为360dp，想要保证在所有设备计算得出的px值都正好是屏幕宽度的话，我们只能修改 density 的值。</p>
+<p>屏幕适配核心原理在于，根据以下公式算出 density<br>当前设备屏幕总宽度（单位为像素）/ 设计图总宽度（单位为 dp) = density<br>density 的意思就是 1 dp 占当前设备多少像素。</p>
+<p>大家都知道，不管你在布局文件中填写的是什么单位，最后都会被转化为 px，系统就是通过上面的方法，将你在项目中任何地方填写的单位都转换为 px 的。<br>所以我们常用的 px 转 dp 的公式 <strong>dp = px / density</strong>，就是根据上面的方法得来的，density 在公式的运算中扮演着至关重要的一步。<br>我再来说说 density，density 在每个设备上都是固定的，DPI / 160 = density，屏幕的总 px 宽度 / density = 屏幕的总 dp 宽度<br>设备 1，屏幕宽度为 1080px，480dpi，屏幕总 dp 宽度为 1080 / (480 / 160) = 360dp<br>设备 2，屏幕宽度为 1440，560dpi，屏幕总 dp 宽度为 1440 / (560 / 160) = 411dp<br>可以看到屏幕的总 dp 宽度在不同的设备上是会变化的，但是我们在布局中填写的 dp 值却是固定不变的。</p>
+<p>假设设计图总宽度为 375 dp，一个 View 在这个设计图上的尺寸是 50dp * 50dp。</p>
+<h3 id="验证设备-1"><a href="#验证设备-1" class="headerlink" title="验证设备 1"></a>验证设备 1</h3><p>屏幕总宽度为 1080 px，根据公式求出 density，1080 / 375 = 2.88 (density)<br>这个 50dp <em> 50dp 的 View，系统最后会将高宽都换算成 px，50dp </em> 2.88 = 144 px (根据公式 dp * density = px)<br>144 / 1080 = 0.133，View 实际宽度与 屏幕总宽度 的比例和 View 在设计图中的比例一致 (50 / 375 = 0.133)，所以完成了等比例缩放。</p>
+<h3 id="验证设备-2"><a href="#验证设备-2" class="headerlink" title="验证设备 2"></a>验证设备 2</h3><p>屏幕总宽度为 1440 px，根据公式求出 density，1440 / 375 = 3.84 (density)<br>这个 50dp <em> 50dp 的 View，系统最后会将高宽都换算成 px，50dp </em> 3.84 = 192 px (根据公式 dp * density = px)<br>192 / 1440 = 0.133，View 实际宽度与 屏幕总宽度 的比例和 View 在设计图中的比例一致 (50 / 375 = 0.133)，所以也完成了等比例缩放。</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
+<li>Github：<a href="https://github.com/JessYanCoding/AndroidAutoSize" target="_blank" rel="noopener">AndroidAutoSize</a></li>
+<li>今日头条技术团队：<a href="https://mp.weixin.qq.com/s/d9QCoBP6kV9VSWvVldVVwA" target="_blank" rel="noopener">一种极低成本的Android屏幕适配方式</a></li>
+<li>掘金：<a href="https://juejin.im/post/5b7a29736fb9a019d53e7ee2" target="_blank" rel="noopener">今日头条屏幕适配方案</a></li>
+</ul>
 
-Android中的dp在渲染前会将
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/18/Android屏幕适配-今日头条适配方案/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
       
     </div>
     
@@ -348,12 +355,12 @@ Android中的dp在渲染前会将
       
 
       
+      
+      
 
       
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -363,10 +370,11 @@ Android中的dp在渲染前会将
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -374,6 +382,10 @@ Android中的dp在渲染前会将
 
 
           
+
+  
+
+
 
         </div>
         
@@ -394,8 +406,17 @@ Android中的dp在渲染前会将
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -493,6 +514,22 @@ Android中的dp在渲染前会将
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#屏幕尺寸、分辨率、像素密度三者关系"><span class="nav-number">1.</span> <span class="nav-text">屏幕尺寸、分辨率、像素密度三者关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这样会存在什么问题呢-？"><span class="nav-number">2.</span> <span class="nav-text">这样会存在什么问题呢 ？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梳理需求"><span class="nav-number">3.</span> <span class="nav-text">梳理需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找兼容突破口"><span class="nav-number">4.</span> <span class="nav-text">找兼容突破口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证设备-1"><span class="nav-number">5.</span> <span class="nav-text">验证设备 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证设备-2"><span class="nav-number">6.</span> <span class="nav-text">验证设备 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文章"><span class="nav-number">7.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -626,6 +663,10 @@ Android中的dp在渲染前会将
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
