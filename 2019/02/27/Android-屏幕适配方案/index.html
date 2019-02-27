@@ -79,14 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="Android中的dp在渲染前会将dp转为px，计算公式为：px = density  dpdensity = dpi / 160px = dp  (dpi / 160)举个例子：屏幕分辨率为：1920 * 1080，屏幕尺寸为5寸的话，那么dpi为440 (2203px / 5 = 440)  这样会存在什么问题呢 ？假如入我们的UI设计图是按屏幕宽度为360dp设计的，那么上述设备中，屏幕宽">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 屏幕适配方案">
+<meta property="og:url" content="http://yoursite.com/2019/02/27/Android-屏幕适配方案/index.html">
 <meta property="og:site_name" content="扫地工程师">
+<meta property="og:description" content="Android中的dp在渲染前会将dp转为px，计算公式为：px = density  dpdensity = dpi / 160px = dp  (dpi / 160)举个例子：屏幕分辨率为：1920 * 1080，屏幕尺寸为5寸的话，那么dpi为440 (2203px / 5 = 440)  这样会存在什么问题呢 ？假如入我们的UI设计图是按屏幕宽度为360dp设计的，那么上述设备中，屏幕宽">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-18T09:43:38.146Z">
+<meta property="og:updated_time" content="2019-02-27T02:29:22.583Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
+<meta name="twitter:title" content="Android 屏幕适配方案">
+<meta name="twitter:description" content="Android中的dp在渲染前会将dp转为px，计算公式为：px = density  dpdensity = dpi / 160px = dp  (dpi / 160)举个例子：屏幕分辨率为：1920 * 1080，屏幕尺寸为5寸的话，那么dpi为440 (2203px / 5 = 440)  这样会存在什么问题呢 ？假如入我们的UI设计图是按屏幕宽度为360dp设计的，那么上述设备中，屏幕宽">
 
 
 
@@ -116,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/02/27/Android-屏幕适配方案/"/>
 
 
 
 
 
-  <title>about | 扫地工程师</title>
+  <title>Android 屏幕适配方案 | 扫地工程师</title>
   
 
 
@@ -237,33 +240,146 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/Android-屏幕适配方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="党政">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouvafxmtn.bkt.clouddn.com/WechatIMG2.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="扫地工程师">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">about</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">Android 屏幕适配方案</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T10:06:24+08:00">
+                2019-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-      </div>
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <ul>
+<li><p>Android中的dp在渲染前会将dp转为px，计算公式为：<br>px = density <em> dp<br>density = dpi / 160<br>px = dp </em> (dpi / 160)<br>举个例子：屏幕分辨率为：1920 * 1080，屏幕尺寸为5寸的话，那么dpi为440 (2203px / 5 = 440)</p>
+</li>
+<li><p>这样会存在什么问题呢 ？<br>假如入我们的UI设计图是按屏幕宽度为360dp设计的，那么上述设备中，屏幕宽度其实为1080/(440/160）= 392.7dp<br>也就是屏幕要比设计图要宽的，这时就会导致按360dp宽度来开发实际显示不全的情况。</p>
+</li>
+<li><p>首先来梳理一下我们的需求，设计图都是以固定的尺寸来设计的。<br>比如以分辨率1920px <em> 1080px，以density为3来标注（这个density是设计自己衡量的，取决于屏幕尺寸)那么此时屏幕其实是640dp </em> 360dp。<br>开发拿到设计图1920px <em> 1080px，还有dpi，就可以计算出density，从而计算出设计图的dp单位：640dp </em> 360dp。</p>
+</li>
+<li><p>从dp和px的转换公式：px = dp * density<br>可以看出，如果设计图宽为360dp，想要保证在所有设备计算得出的px值都正好是屏幕宽度的话，我们只能修改 density 的值。</p>
+</li>
+<li><p>屏幕适配核心原理在于，根据以下公式算出 density<br>当前设备屏幕总宽度（单位为像素）/ 设计图总宽度（单位为 dp) = density<br>density 的意思就是 1 dp 占当前设备多少像素。</p>
+</li>
+<li><p>大家都知道，不管你在布局文件中填写的是什么单位，最后都会被转化为 px，系统就是通过上面的方法，将你在项目中任何地方填写的单位都转换为 px 的。<br>所以我们常用的 px 转 dp 的公式 dp = px / density，就是根据上面的方法得来的，density 在公式的运算中扮演着至关重要的一步。<br>我再来说说 density，density 在每个设备上都是固定的，DPI / 160 = density，屏幕的总 px 宽度 / density = 屏幕的总 dp 宽度<br>设备 1，屏幕宽度为 1080px，480dpi，屏幕总 dp 宽度为 1080 / (480 / 160) = 360dp<br>设备 2，屏幕宽度为 1440，560dpi，屏幕总 dp 宽度为 1440 / (560 / 160) = 411dp<br>可以看到屏幕的总 dp 宽度在不同的设备上是会变化的，但是我们在布局中填写的 dp 值却是固定不变的。</p>
+</li>
+<li><p>假设设计图总宽度为 375 dp，一个 View 在这个设计图上的尺寸是 50dp * 50dp。</p>
+</li>
+</ul>
+<h3 id="验证设备-1"><a href="#验证设备-1" class="headerlink" title="验证设备 1"></a>验证设备 1</h3><p>屏幕总宽度为 1080 px，根据公式求出 density，1080 / 375 = 2.88 (density)<br>这个 50dp <em> 50dp 的 View，系统最后会将高宽都换算成 px，50dp </em> 2.88 = 144 px (根据公式 dp * density = px)<br>144 / 1080 = 0.133，View 实际宽度与 屏幕总宽度 的比例和 View 在设计图中的比例一致 (50 / 375 = 0.133)，所以完成了等比例缩放。</p>
+<h3 id="验证设备-2"><a href="#验证设备-2" class="headerlink" title="验证设备 2"></a>验证设备 2</h3><p>屏幕总宽度为 1440 px，根据公式求出 density，1440 / 375 = 3.84 (density)<br>这个 50dp <em> 50dp 的 View，系统最后会将高宽都换算成 px，50dp </em> 3.84 = 192 px (根据公式 dp * density = px)<br>192 / 1440 = 0.133，View 实际宽度与 屏幕总宽度 的比例和 View 在设计图中的比例一致 (50 / 375 = 0.133)，所以也完成了等比例缩放。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li>Github：<a href="https://github.com/JessYanCoding/AndroidAutoSize" target="_blank" rel="noopener">AndroidAutoSize</a></li>
+<li>今日头条技术团队：<a href="https://mp.weixin.qq.com/s/d9QCoBP6kV9VSWvVldVVwA" target="_blank" rel="noopener">一种极低成本的Android屏幕适配方式</a></li>
+<li>掘金：<a href="https://juejin.im/post/5b7a29736fb9a019d53e7ee2" target="_blank" rel="noopener">今日头条屏幕适配方案</a></li>
+</ul>
+<hr>
+<h1 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h1><p>感谢您花时间阅读我的简历，期待能对你有所。</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -296,8 +412,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -395,6 +520,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#验证设备-1"><span class="nav-number">1.</span> <span class="nav-text">验证设备 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证设备-2"><span class="nav-number">2.</span> <span class="nav-text">验证设备 2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number"></span> <span class="nav-text">参考文章</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#致谢"><span class="nav-number"></span> <span class="nav-text">致谢</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
