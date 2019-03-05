@@ -79,24 +79,19 @@
 
 
 
-<meta name="description" content="About党政 1993年，出生于牧民家庭, 由于牧场的教育资源所限，在家度过了6年的幼儿园时光, 7岁进入了一所非封闭的寄宿制小学, 从此便学会了照顾自己, 并养成了刻苦、踏实的做事习惯。 2012年，成为内蒙古师范大学计算机专业的一名学生， 大学期间学习了Java语言、C语言等， 在校园工作室，负责《跑步社区》Web端的程序设计与开发， 储备了一定的编程基础能力。 2016年离开了辽阔的内蒙">
-<meta property="og:type" content="website">
-<meta property="og:title" content="93olduncle">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="HashMap的主干是一个Entry数组，Entry是HashMap的基本组成单元，每一个Entry包含一个key-value键值对。 HashMap的主干数组，可以看到就是一个Entry数组，初始值为空数组{}，主干数组的长度一定是2的次幂。 transient Entry[] table = (Entry[]) EMPTY_TABLE; HashMap的整体结构如下简单来说，HashMap是由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashMap实现原理">
+<meta property="og:url" content="http://yoursite.com/2019/03/05/HashMap实现原理/index.html">
 <meta property="og:site_name" content="93olduncle">
-<meta property="og:description" content="About党政 1993年，出生于牧民家庭, 由于牧场的教育资源所限，在家度过了6年的幼儿园时光, 7岁进入了一所非封闭的寄宿制小学, 从此便学会了照顾自己, 并养成了刻苦、踏实的做事习惯。 2012年，成为内蒙古师范大学计算机专业的一名学生， 大学期间学习了Java语言、C语言等， 在校园工作室，负责《跑步社区》Web端的程序设计与开发， 储备了一定的编程基础能力。 2016年离开了辽阔的内蒙">
+<meta property="og:description" content="HashMap的主干是一个Entry数组，Entry是HashMap的基本组成单元，每一个Entry包含一个key-value键值对。 HashMap的主干数组，可以看到就是一个Entry数组，初始值为空数组{}，主干数组的长度一定是2的次幂。 transient Entry[] table = (Entry[]) EMPTY_TABLE; HashMap的整体结构如下简单来说，HashMap是由">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1m5pjb0j21900u0wkj.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1u6bc7tj20zk0qoajg.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1uejviej21400u0afb.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1wfup1lj20nq0hsq7e.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1xfbujdj20u0190dor.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1xq7a84j20u011inbd.jpg">
-<meta property="og:updated_time" content="2019-02-28T05:42:53.564Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/b051c2f9ly1g0rxral8dbj21as10mjv1.jpg">
+<meta property="og:updated_time" content="2019-03-05T07:41:17.486Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="93olduncle">
-<meta name="twitter:description" content="About党政 1993年，出生于牧民家庭, 由于牧场的教育资源所限，在家度过了6年的幼儿园时光, 7岁进入了一所非封闭的寄宿制小学, 从此便学会了照顾自己, 并养成了刻苦、踏实的做事习惯。 2012年，成为内蒙古师范大学计算机专业的一名学生， 大学期间学习了Java语言、C语言等， 在校园工作室，负责《跑步社区》Web端的程序设计与开发， 储备了一定的编程基础能力。 2016年离开了辽阔的内蒙">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1m5pjb0j21900u0wkj.jpg">
+<meta name="twitter:title" content="HashMap实现原理">
+<meta name="twitter:description" content="HashMap的主干是一个Entry数组，Entry是HashMap的基本组成单元，每一个Entry包含一个key-value键值对。 HashMap的主干数组，可以看到就是一个Entry数组，初始值为空数组{}，主干数组的长度一定是2的次幂。 transient Entry[] table = (Entry[]) EMPTY_TABLE; HashMap的整体结构如下简单来说，HashMap是由">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/b051c2f9ly1g0rxral8dbj21as10mjv1.jpg">
 
 
 
@@ -126,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/05/HashMap实现原理/"/>
 
 
 
 
 
-  <title> | 93olduncle</title>
+  <title>HashMap实现原理 | 93olduncle</title>
   
 
 
@@ -247,53 +242,150 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/05/HashMap实现原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="93olduncle">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/b051c2f9ly1g0kyi0v8tnj20u00u077u.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="93olduncle">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline"></h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <p><img src="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1m5pjb0j21900u0wkj.jpg" alt=""></p>
-<h1 id="About"><a href="#About" class="headerlink" title="About"></a><strong>About</strong></h1><p>党政</p>
-<p>1993年，出生于牧民家庭,</p>
-<p>由于牧场的教育资源所限，在家度过了6年的幼儿园时光,</p>
-<p>7岁进入了一所非封闭的寄宿制小学,</p>
-<p>从此便学会了照顾自己,</p>
-<p>并养成了刻苦、踏实的做事习惯。</p>
-<p>2012年，成为内蒙古师范大学计算机专业的一名学生，</p>
-<p>大学期间学习了Java语言、C语言等，</p>
-<p>在校园工作室，负责《跑步社区》Web端的程序设计与开发，</p>
-<p>储备了一定的编程基础能力。</p>
-<p>2016年离开了辽阔的内蒙古大草原，</p>
-<p>来到北京，从事软件研发，</p>
-<p>独立开发作品《秀译西班牙语》，</p>
-<p>并在App Store上投放，</p>
-<p>目前下载量已突破4万次，展示次数38万左右。</p>
-<p>2016年6月就职北京四合天地科技有限公司，</p>
-<p>从事移动端软件研发（Android &amp; iOS），</p>
-<p>至今2019（己亥年）。</p>
-<h1 id="来侃草原了，原来你的学费是家里卖了两头牛凑的。"><a href="#来侃草原了，原来你的学费是家里卖了两头牛凑的。" class="headerlink" title="来侃草原了，原来你的学费是家里卖了两头牛凑的。"></a><strong>来侃草原了，原来你的学费是家里卖了两头牛凑的。</strong></h1><p><img src="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1u6bc7tj20zk0qoajg.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1uejviej21400u0afb.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1wfup1lj20nq0hsq7e.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1xfbujdj20u0190dor.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/b051c2f9gy1g0m1xq7a84j20u011inbd.jpg" alt=""></p>
-<h1 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a><strong>致谢</strong></h1>
+          <h1 class="post-title" itemprop="name headline">HashMap实现原理</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T14:58:07+08:00">
+                2019-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>HashMap的主干是一个Entry数组，Entry是HashMap的基本组成单元，每一个Entry包含一个key-value键值对。</p>
+<p>HashMap的主干数组，可以看到就是一个Entry数组，初始值为空数组{}，主干数组的长度一定是2的次幂。</p>
+<p><strong>transient Entry<k,v>[] table = (Entry<k,v>[]) EMPTY_TABLE;</k,v></k,v></strong></p>
+<h3 id="HashMap的整体结构如下"><a href="#HashMap的整体结构如下" class="headerlink" title="HashMap的整体结构如下"></a>HashMap的整体结构如下</h3><p><img src="http://ww1.sinaimg.cn/large/b051c2f9ly1g0rxral8dbj21as10mjv1.jpg" alt=""><br>简单来说，HashMap是由数组和链表组成的，数组是HashMap的主体，链表则是主要为了解决哈希冲突而存在的。</p>
+<p>HashMap中主要是通过key的hashCode来计算hash值的，只要hashCode相同，计算出来的hash值就一样。如果存储的对象多了，就有可能不同的对象计算出来的hash值是相同的，这就出现了所谓的hash冲突。</p>
+<p>HashMap其实就是一个Entry数组，Entry对象中包含了键和值，其中next也是一个Entry对象，它就是用来处理hash冲突的，形成一个链表。</p>
+<h3 id="存储数据put方法"><a href="#存储数据put方法" class="headerlink" title="存储数据put方法"></a>存储数据put方法</h3><p>HashMap存放数据的时候，会先拿到key的hashCode值，对其进行hash运算，得到具体的hash值，然后根据hash值查找存放的位置，找到存放的位置后，然后遍历Entry数组找到对应的位置的Entry，如果当前的key已经存在，且对比Entry的hash值和key的相同的话，那么就更新value值，否则就将key和value值加到数组中。</p>
+<p>这里需要注意<br><strong>e.key == key || e.key.equals(key)</strong><br>并且<br><strong>e.hash == hash(key对应的hash值)</strong></p>
+<h3 id="HashMap的get方法"><a href="#HashMap的get方法" class="headerlink" title="HashMap的get方法"></a>HashMap的get方法</h3><p>首先拿到key的hashCode，求出hash值，根据hash值找到索引的位置，然后去Entry数组中获取对应索引的元素，如果key值相同并且key的hash相同，那就是我们要找的Entry，把对应的Entry值返回去即可。</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
+<li>CSDN 师太，老衲把持不住了：<a href="https://blog.csdn.net/u011277123/article/details/53134641" target="_blank" rel="noopener">HashMap实现原理</a></li>
+<li>博客园 dreamcatcher-cx：<a href="https://www.cnblogs.com/chengxiao/p/6059914.html" target="_blank" rel="noopener">HashMap实现原理及源码分析</a></li>
+</ul>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/18/Android屏幕适配-今日头条适配方案/" rel="next" title="Android屏幕适配-今日头条适配方案">
+                <i class="fa fa-chevron-left"></i> Android屏幕适配-今日头条适配方案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -456,7 +548,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#About"><span class="nav-number">1.</span> <span class="nav-text">About</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#来侃草原了，原来你的学费是家里卖了两头牛凑的。"><span class="nav-number">2.</span> <span class="nav-text">来侃草原了，原来你的学费是家里卖了两头牛凑的。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#致谢"><span class="nav-number">3.</span> <span class="nav-text">致谢</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap的整体结构如下"><span class="nav-number">1.</span> <span class="nav-text">HashMap的整体结构如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储数据put方法"><span class="nav-number">2.</span> <span class="nav-text">存储数据put方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap的get方法"><span class="nav-number">3.</span> <span class="nav-text">HashMap的get方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文章"><span class="nav-number">4.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
             
 
           </div>
